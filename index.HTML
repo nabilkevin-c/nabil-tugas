@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hitung Diskon HP</title>
+</head>
+<body>
+    <h1>Hitung Diskon HP</h1>
+    <label for="harga">Harga HP (Rp): </label>
+    <input type="number" id="harga" placeholder="Masukkan harga" />
+    <br>
+    <label for="diskon">Persentase Diskon (%): </label>
+    <input type="number" id="diskon" placeholder="Masukkan diskon" />
+    <br>
+    <button id="hitung">Hitung</button>
+    
+    <h2>Hasil:</h2>
+    <p id="hasilDiskon"></p>
+    <p id="hasilBayar"></p>
+
+    <script>
+        function hitungDiskon(hargaAwal, persentaseDiskon) {
+            const jumlahDiskon = hargaAwal * (persentaseDiskon / 100);
+            const jumlahBayar = hargaAwal - jumlahDiskon;
+            return { jumlahDiskon, jumlahBayar };
+        }
+
+        document.getElementById('hitung').addEventListener('click', function() {
+            const hargaHP = parseFloat(document.getElementById('harga').value);
+            const diskon = parseFloat(document.getElementById('diskon').value);
+
+            if (isNaN(hargaHP) || isNaN(diskon)) {
+                alert("Silakan masukkan nilai yang valid.");
+                return;
+            }
+
+            const { jumlahDiskon, jumlahBayar } = hitungDiskon(hargaHP, diskon);
+            document.getElementById('hasilDiskon').innerText = `Jumlah Diskon: Rp ${jumlahDiskon.toFixed(2)}`;
+            document.getElementById('hasilBayar').innerText = `Jumlah yang Harus Dibayarkan: Rp ${jumlahBayar.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html>
